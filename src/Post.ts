@@ -1,10 +1,14 @@
 import mongoose from 'mongoose'
 
-interface IPost {
+export interface IPost {
   author: string
   title: string
   content: string
   picture?: string
+}
+
+export interface IPostMongo extends IPost {
+  _id: string
 }
 
 const Post = new mongoose.Schema<IPost>({
