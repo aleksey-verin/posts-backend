@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import router from './router.js'
+import fileUpload from 'express-fileupload'
 
 const PORT = 3001
 const DB_URL = 'mongodb+srv://verevaa:OCEyb1lQFp6EVCEa@cluster0.ehqjdbc.mongodb.net/?retryWrites=true&w=majority'
@@ -8,6 +9,7 @@ const DB_URL = 'mongodb+srv://verevaa:OCEyb1lQFp6EVCEa@cluster0.ehqjdbc.mongodb.
 const app = express()
 
 app.use(express.json())
+app.use(fileUpload({}))
 app.use('/api', router)
 // app.use('/user', otherRouter)
 

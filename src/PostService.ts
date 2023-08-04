@@ -1,9 +1,17 @@
 import Post, { IPost, IPostMongo } from './Post.js'
+import FileService from './FileService.js'
+import { UploadedFile } from 'express-fileupload'
 
 class PostService {
-  async create(post: IPost) {
-    const createdPost = await Post.create(post)
-    return createdPost
+  async create(post: IPost, picture: UploadedFile | UploadedFile[] | undefined) {
+    if (picture) {
+      const fileName = FileService.saveFile(picture)
+      const createdPost = await Post.create({ ...post, picture: fileName })
+      return createdPost
+    } else {
+      const createdPost = await Post.create(post)
+      return createdPost
+    }
   }
   async getAll() {
     const posts = await Post.find()
